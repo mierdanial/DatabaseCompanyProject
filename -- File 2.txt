@@ -1,0 +1,11 @@
+-- File 2
+-- This query is to find the invoice number of payment made by restaurant to pay for supplies where the discount of the supplier is more than 1% and invoice tax is more than 1%
+
+SELECT I.InvNum
+FROM Invoice I
+INNER JOIN Payment p ON p.PayID = I.PayID
+INNER JOIN Restaurant rt ON rt.RestID = p.RestID
+INNER JOIN Supplier sup ON sup.SupplierID = rt.SupplierID
+WHERE sup.SupplierDiscount > 1 AND I.InvTax > 1
+GROUP BY I.InvNum
+;

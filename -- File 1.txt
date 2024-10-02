@@ -1,0 +1,6 @@
+-- File 1
+-- The query is to find the name of supplier for the restaurant's ingredients
+SELECT s.SupplierName, r.RestIngredients
+FROM Supplier s,  Restaurant r
+WHERE s.SupplierID = r.SupplierID
+;

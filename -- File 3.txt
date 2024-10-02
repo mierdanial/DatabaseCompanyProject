@@ -1,0 +1,14 @@
+-- File 3
+-- This query is to find the IC number and the name of customers who sent items to laundry, laundry charges that are more than RM 14 and the customer's room information such as room pax and number of bed where the customer's room pax is more than 1, and the customer's booking status is 'confirmed'. It is also to find the names and departments of the employee handles the customers and the country and city the employees live in
+
+SELECT c.CustIC, c.CustFirstName , l.LaundryItem, l.LaundryCharge, r.RoomPax, r.RoomNumOfBed , b.BookStatus, b.BookLoyaltyProgram, e.EmName,e.EmDepartment,a.AddCountry, a.AddCity
+FROM Customer c
+INNER JOIN Laundry l ON l.CustID = c.CustID
+INNER JOIN Room r ON r.RoomID = l.RoomID
+INNER JOIN Room_Booking RB ON RB.RoomID = r.RoomID
+INNER JOIN Booking b ON b.BookingID = RB.BookingID
+INNER JOIN Employee e ON e.EmID = b.EmID
+INNER JOIN Em_Add EA ON EA.EmID = e.EmID
+INNER JOIN Address a ON a.AddID = e.AddID
+WHERE r.RoomPax > 1 AND l.LaundryCharge > 14.00 AND b.BookStatus = 'Confirmed'
+;

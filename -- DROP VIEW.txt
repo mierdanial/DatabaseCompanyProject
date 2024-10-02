@@ -1,0 +1,14 @@
+-- DROP VIEW
+DROP VIEW PCA_Display;
+
+-- CREATE VIEW
+Create View PCA_Display
+AS SELECT p.PayID, c.CustID, a.AddID
+From Payment p
+JOIN Customer c ON c.CustID = p.CustID
+JOIN Address a ON a.AddID = c.AddID
+WHERE PayAmount > 50;
+
+-- DISPLAY VIEW
+SELECT * FROM PCA_Display;
+--  

@@ -1,0 +1,20 @@
+-- File 4
+-- This query is to find the name of employees and the city they live in where city is 'Ipoh', and to find the customer's first name, total days they stayed where total days are more than 1, including the name of the bank they use to pay, the price for the room where the price is more than 100, the subtotal in invoice where the subtotal is more than 500 and the booking time the customer made.
+
+SELECT e.EmName, a.AddCity, c.CustFirstName, r.RoomTotalDays, p.PayBankName, Rpmt.RoomPPrice, I.InvSubtotal, b.BookTime
+FROM Employee e
+INNER JOIN Em_Add EA ON EA.EmID = e.EmID
+INNER JOIN Address a ON a.AddID = EA.AddID
+INNER JOIN Cust_Add CA ON CA.AddID = a.AddID
+INNER JOIN Customer c ON c.CustID = CA.CustID
+INNER JOIN Room_Cust RC ON RC.CustID = c.CustID
+INNER JOIN Room r ON r.RoomID = RC.RoomID
+INNER JOIN Room_Pay RP ON RP.RoomID = r.RoomID
+INNER JOIN Payment p ON p.PayID = RP.PayID
+INNER JOIN RoomP_Pay RPP ON RPP.PayID = p.PayID
+INNER JOIN Room_Payment Rpmt ON Rpmt.RoomPID = RPP.RoomPID
+INNER JOIN Invoice I ON I.InvID = Rpmt.InvID
+INNER JOIN Booking b ON b.BookingID = I.BookingID
+WHERE r.RoomTotalDays > 1 AND Rpmt.RoomPPrice > 100 AND I.InvSubtotal > 500 AND a.AddCity = 'Ipoh'
+ORDER BY e.EmName DESC;
+
